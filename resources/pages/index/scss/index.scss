@@ -1,0 +1,10 @@
+@use 'vendor/lib';
+
+.index {
+    &-logo {
+        height: 140px;
+        max-width: 100%;
+        min-width: 1px;
+        position: relative; 
+    }
+}

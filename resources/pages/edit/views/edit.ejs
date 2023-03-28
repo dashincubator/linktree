@@ -1,0 +1,78 @@
+<section class='index-header --spacer-top --spacer-600'>
+    <div class="container --flex-center --max-width-1400px">
+        <img class='index-logo gallery-logo--center' src="/images/avatar.svg" alt="">
+
+        <h2 class='page-title --margin-top --margin-500 --text-center --text-crop-bottom'>
+            <%= name %>
+        </h2>
+    </div>
+</section>
+
+<section class='--spacer-vertical --spacer-600'>
+    <div class="container --flex-center --max-width-600px">
+        <template data-bind='{"ref": "link.links"}'>
+            <label class="field-mask field-mask--input --flex-row --margin-top" data-bind='{"ref": "link.{value}"}'>
+                <input class='field-tag --border-grey-400 --border-right --border-width-300' name='links[{random}][name]' placeholder='Button name' type='text' value=''>
+                <input class='field-tag' name='links[{random}][url]' placeholder='' type='text' value='{value}'>
+
+                <div class="button --color-state --color-text" data-bind='{"refs": {"remove": "link.{value}"}}' data-click='remove'>
+                    <div class="icon">
+                        <%- include(svg + '/close.svg') %>
+                    </div>
+                </div>
+            </label>
+        </template>
+
+        <form action="/edit" method="post" enctype='application/x-www-form-urlencoded'>
+            <div class="field field--background --background-state --background-white --border-radius-600 --flex-column --text-crop-top" data-focusinout="toggle">
+                <span class="field-title">Add Links</span>
+
+                <label class="field-mask field-mask--input --flex-row">
+                    <input class='field-tag' data-bind='{"ref": "link.tag", "refs": {"field": {"container": "link.container", "template": "link.links"}}}' data-keydown='field.tag' placeholder='' type='text' value=''>
+
+                    <div class="button --color-state --color-text" data-bind='{"refs": {"field": {"container": "link.container", "tag": "link.tag", "template": "link.links"}}}' data-click='field.tag.button'>
+                        <div class="icon">
+                            <%- include(svg + '/plus.svg') %>
+                        </div>
+                    </div>
+                </label>
+
+                <div class="field-description">
+                    ex: https://domain.com/xyz
+                </div>
+
+                <div class="row" data-bind='{"ref": "link.container"}'>
+                    <% for (let i = 0, n = links.length; i < n; i++) { %>
+                        <% let link = links[i]; %>
+
+                        <label class="field-mask field-mask--input --flex-row --margin-top" data-bind='{"ref": "link.<%= link.url %>"}'>
+                            <input class='field-tag --border-grey-400 --border-right --border-width-300' name='links[<%= i %>][name]' placeholder='Button name' type='text' value='<%= link.name %>'>
+                            <input class='field-tag' name='links[<%= i %>][url]' placeholder='' type='text' value='<%= link.url %>'>
+                            <input type="hidden" name="links[<%= i %>][$id]" value="<%= link['$id'] %>">
+
+                            <div class="button --color-state --color-text" data-bind='{"refs": {"remove": "link.<%= link.url %>"}}' data-click='remove'>
+                                <div class="icon">
+                                    <%- include(svg + '/close.svg') %>
+                                </div>
+                            </div>
+                        </label>
+                    <% } %>
+                </div>
+            </div>
+
+            <input type="hidden" name="test" value="hey">
+
+            <div class="row --flex-end --spacer-top --spacer-400">
+                <a class="button --backgroun-grey-300 --background-state --background-white --color-state --color-text --margin-right --margin-400" href='/'>
+                    <div class="icon">
+                        <%- include(svg + '/home.svg') %>
+                    </div>
+                </a>
+
+                <button class="button --background-secondary --background-state --color-state --color-white">
+                    Save
+                </button>
+            </div>
+        </form>
+    </div>
+</section>

@@ -1,0 +1,14 @@
+/**
+ *------------------------------------------------------------------------------
+ *
+ *  Anchored Elements Container
+ *
+ */
+
+@use 'vendor/lib';
+
+.anchors {
+    @include lib.position(absolute, full);
+    pointer-events: none;
+    z-index: 9;
+}

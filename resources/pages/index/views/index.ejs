@@ -1,0 +1,37 @@
+<section class='index-header --spacer-top --spacer-600'>
+    <div class="container --flex-center --max-width-1400px">
+        <img class='index-logo gallery-logo--center' src="/images/avatar.svg" alt="">
+
+        <h2 class='page-title --margin-top --margin-500 --text-center --text-crop-bottom'>
+            <%= name %>
+        </h2>
+    </div>
+</section>
+
+<section class='--spacer-vertical --spacer-600'>
+    <div class="container --flex-center --max-width-600px">
+
+        <% for (let i = 0, n = links.length; i < n; i++) { %>
+            <% let link = links[i]; %>
+
+            <a class="button --background-state --background-grey-300 --background-white --color-state --color-text --padding-500 --width-full" href='<%= link.url %>' target='_blank'>
+                <%= link.name %>
+            </a>
+        <% } %>
+
+        <% if (!links.length) { %>
+            <div>
+                0 Links found
+            </div>
+        <% } %>
+
+        <div class="row --flex-end --spacer-top --spacer-400">
+            <a class="button --backgroun-grey-300 --background-state --background-white --color-state --color-text" href='/edit'>
+                <div class="icon">
+                    <%- include(svg + '/settings.svg') %>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</section>
